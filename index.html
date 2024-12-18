@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {"view": {"continuousWidth": 300, "continuousHeight": 300}},
+  "vconcat": [
+    {
+      "data": {"name": "data-79eefb369b9067d2106ee3d541c7444d"},
+      "mark": {"type": "bar", "orient": "horizontal"},
+      "encoding": {
+        "color": {
+          "condition": {
+            "param": "Select",
+            "value": "steelblue",
+            "empty": false
+          },
+          "value": "lightgray"
+        },
+        "tooltip": [
+          {"field": "Bill Type", "type": "nominal"},
+          {"field": "# of Bills", "type": "quantitative"}
+        ],
+        "x": {"field": "# of Bills", "type": "quantitative"},
+        "y": {"field": "Bill Type", "type": "nominal"}
+      },
+      "name": "view_1",
+      "title": "Number of Bills by Type"
+    },
+    {
+      "data": {"name": "data-3139a956050fb54cf4dc0e96b72d30b8"},
+      "mark": {"type": "bar", "orient": "horizontal"},
+      "encoding": {
+        "color": {"value": "orange"},
+        "tooltip": [
+          {"field": "Action", "type": "nominal"},
+          {"field": "Percentage", "type": "quantitative"}
+        ],
+        "x": {"field": "Percentage", "type": "quantitative"},
+        "y": {"field": "Action", "type": "nominal"}
+      },
+      "title": "Bill Action Percentages",
+      "transform": [{"filter": {"param": "Select", "empty": false}}]
+    }
+  ],
+  "params": [
+    {
+      "name": "Select",
+      "select": {"type": "point", "fields": ["Bill Type"]},
+      "views": ["view_1"]
+    }
+  ],
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.16.3.json",
+  "datasets": {
+    "data-79eefb369b9067d2106ee3d541c7444d": [
+      {"Bill Type": "Education", "# of Bills": 70},
+      {"Bill Type": "Housing", "# of Bills": 35},
+      {"Bill Type": "Health", "# of Bills": 34}
+    ],
+    "data-3139a956050fb54cf4dc0e96b72d30b8": [
+      {
+        "Bill Type": "Education",
+        "Action": "Governor Signed",
+        "Percentage": 72.85714285714285
+      },
+      {
+        "Bill Type": "Education",
+        "Action": "Postponed",
+        "Percentage": 27.142857142857142
+      },
+      {
+        "Bill Type": "Housing",
+        "Action": "Governor Signed",
+        "Percentage": 71.42857142857143
+      },
+      {
+        "Bill Type": "Housing",
+        "Action": "Postponed",
+        "Percentage": 28.57142857142857
+      },
+      {
+        "Bill Type": "Health",
+        "Action": "Governor Signed",
+        "Percentage": 67.64705882352942
+      },
+      {
+        "Bill Type": "Health",
+        "Action": "Postponed",
+        "Percentage": 32.35294117647059
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
